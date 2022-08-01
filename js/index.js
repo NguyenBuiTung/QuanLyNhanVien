@@ -46,7 +46,7 @@ function createStaff() {
     var staffName = document.querySelector("#name").value
     var staffEmail = document.querySelector("#email").value
     var staffPass = document.querySelector("#password").value
-    var staffWorkday = document.querySelector("#datepicker").value
+    var staffWorkingday = document.querySelector("#datepicker").value
     var staffSalary = document.querySelector("#luongCB").value
     var staffPositon = document.querySelector("#chucvu").value
     var staffWorktime = document.querySelector("#gioLam").value
@@ -55,7 +55,7 @@ function createStaff() {
         staffUser,
         staffName,
         staffEmail,
-        staffWorkday,
+        staffWorkingday,
         staffPositon,
         staffSalary,
         staffPass,
@@ -88,7 +88,10 @@ function renderStaff(arrNv) {
     }
     document.querySelector("#tableDanhSach").innerHTML = output
 }
-
+/**
+ * hàm chức năng xóa nhân viên
+ * @param {*} userClick 
+ */
 function delStaff(userClick) {
     var indexStaff = -1
     for (var i = 0; i < staffList.length; i++) {
@@ -103,25 +106,36 @@ function delStaff(userClick) {
     renderStaff(staffList)
 }
 function updateStaff() {
-    var upStaff = new Staff()
-    upStaff.user = document.getElementById("tknv").value
-    var up = -1
-    for (var i = 0; i < staffList.length; i++) {
-        if (staffList[i].user === upStaff.user) {
-            up = i
+    // alert(123)
+    var staffUpdate = new Staff()
+    staffUpdate.user = document.querySelector("#tknv").value
+    staffUpdate.name = document.querySelector("#name").value
+    staffUpdate.email = document.querySelector("#email").value
+    staffUpdate.workingday = document.querySelector("#datepicker").value
+    staffUpdate.position = document.querySelector("#luongCB").value
+    staffUpdate.salary = document.querySelector("#chucvu").value
+    staffUpdate.worktime = document.querySelector("#gioLam").value
+    staffUpdate.pass = document.querySelector("#password").value
+    // console.log(staffUpdate)
+    //Duyệt qua từng obj trong studentList tìm ra vị trí của obj cần thay đổi 
+    var indexEdit = -1
+    for (i = 0; i < staffList.length; i++) {
+        if (staffList[i].user === staffUpdate.user) {
+            indexEdit = i
             break
         }
     }
-    if (up !== -1) {
-        document.querySelector("#tknv").value = up.user
-        document.querySelector("#name").value = up.name
-        document.querySelector("#email").value = up.email
-        document.querySelector("#datepicker").value = up.workingday
-        document.querySelector("#chucvu").value = up.position
-        document.querySelector("#gioLam").value = up.staffWorktime
-        document.querySelector("#password").value = up.pass
-        document.querySelector("#luongCB").value = up.salary
+    if (indexEdit !== -1) {
+        //nếu tìm thấy vị trí trong mảng thì lấy obj trong mảng gắn lại bằng obj trên giao diện người dùng thay đổi
+        staffList[indexEdit].name = staffUpdate.name
+        staffList[indexEdit].email = staffUpdate.email
+        staffList[indexEdit].workingday = staffUpdate.workingday
+        staffList[indexEdit].salary = staffUpdate.salary
+        staffList[indexEdit].position = staffUpdate.position
+        staffList[indexEdit].worktime = staffUpdate.worktime
+        staffList[indexEdit].pass = staffUpdate.pass
+        //gọi hàm rendertable truyền cho mảng mới
+        renderStaff(staffList)
     }
 }
-updateStaff()
 

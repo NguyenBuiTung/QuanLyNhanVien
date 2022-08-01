@@ -1,7 +1,7 @@
 /**
  * Thêm 1 Nhân Viên Mới
  */
-function Staff(user,name,email,workingday,position,salary,worktime,pass,typestaff){
+function Staff(user,name,email,workingday,position,salary,worktime,pass){
     this.user=user
     this.name=name
     this.email=email
