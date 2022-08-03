@@ -39,8 +39,11 @@
 +nếu nhân viên có giờ làm dưới 160h: nhân viên trung bình
  */
 
-var staffList = []
+var staffList = [];
+
 function createStaff() {
+    console.log("createStaff",staffList)
+
     //Lấy thông tin từ input
     var staffUser = document.querySelector("#tknv").value
     var staffName = document.querySelector("#name").value
@@ -61,12 +64,18 @@ function createStaff() {
         staffPass,
         staffWorktime,
     )
+    console.log("first", staffList);
+
     //3.Push Đối tượng Nhân Viên vào danh sách
     staffList.push(staff)
+    console.log("--------------------",staffList)
     renderStaff(staffList)
     saveLocalStorage(staffList, "arrStaff")
 }
+
 function renderStaff(arrNv) {
+    // if(!arrNv) return null;
+    // console.log("--------------",arrNv)
     var output = ""
     var obStaff;
     for (var i = 0; i < arrNv.length; i++) {
@@ -82,13 +91,7 @@ function renderStaff(arrNv) {
                 return this.salary * 1
             }
         }
-        obStaff.xeploai = function () {
-            var string = ""
-            if (this.worktime > 192) {
-            string="Xuất Sắc"
-            return string
-            }
-        }
+        
         var trNv = `
         <tr>
         <td>${obStaff.user}</td>
@@ -216,6 +219,8 @@ function getLocalStorage(key) {
 //đợi html css load xong sẽ tự động thực thi
 window.onload = function () {
     staffList = getLocalStorage("arrStaff")
+    console.log("0-90-90-0909",staffList);
+    if(!staffList) return;
     renderStaff(staffList)
 }
 

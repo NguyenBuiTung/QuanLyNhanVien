@@ -22,10 +22,6 @@ function Staff(user, name, email, workingday, position, salary, worktime, pass) 
         }
     }
     this.xeploai = function () {
-        var string=""
-        if (this.worktime > 192) {
-            string="Xuất Sắc"
-            return string
-        }
+       
     }
 }
